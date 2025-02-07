@@ -1,0 +1,38 @@
+{
+    "manifest_version": 3,
+    "name": "CodeClock",
+    "version": "0.0.0",
+    "description": "Improve your problem solving strategy with CodeClock stopwatch and statistics",
+    "icons": {
+      "16": "src/assets/CodeClock16.png",
+      "48": "src/assets/CodeClock16.png",
+      "128": "src/assets/CodeClock16.png"
+    },
+    "permissions": [
+      "activeTab",
+      "cookies",
+      "declarativeContent",
+      "scripting",
+      "storage",
+      "tabs"
+    ],
+    "host_permissions": ["https://codeforces.com/*/problem/*"],
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": {
+      "16": "src/assets/CodeClock16.png",
+      "48": "src/assets/CodeClock16.png",
+      "128": "src/assets/CodeClock16.png"
+    }
+    },
+    "background": {
+      "service_worker": "src/background/background.ts"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://codeforces.com/*/problem/*"],
+        "js": ["src/contentScript/main.tsx"],
+        "run_at": "document_end"
+      }
+    ]
+  }
