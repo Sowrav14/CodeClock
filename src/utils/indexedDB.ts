@@ -4,6 +4,7 @@ const STORE_NAME = "Problems";
 interface DBinstance {
     id : string,
     name : string,
+    rating : string,
     solved : boolean,
     time : number
 }
@@ -74,4 +75,32 @@ export const updateItem = async (id: string, updatedData: DBinstance): Promise<v
         };
         getRequest.onerror = () => reject(getRequest.error);
     });
+};
+
+export const getSolvedProblems = async (): Promise<any[]> => {
+    try {
+        const db = await openDB();
+        const transaction = db.transaction(STORE_NAME, "readonly");
+        const store = transaction.objectStore(STORE_NAME);
+        const solvedProblems: any[] = [];
+    
+        return new Promise((resolve, reject) => {
+            store.openCursor().onsuccess = (event) => {
+                const cursor = (event.target as IDBRequest).result;
+                if (cursor) {
+                    if (cursor.value.solved === true) {
+                        solvedProblems.push(cursor.value);
+                    }
+                    cursor.continue();
+                } else {
+                    resolve(solvedProblems);
+                }
+            };
+    
+            transaction.onerror = () => reject(transaction.error);
+        });
+    } catch (error) {
+        console.error("Error accessing IndexedDB:", error);
+        return [];
+    }
 };

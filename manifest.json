@@ -14,6 +14,7 @@
       "declarativeContent",
       "scripting",
       "storage",
+      "unlimitedStorage",
       "tabs"
     ],
     "host_permissions": ["https://codeforces.com/*/problem/*"],
@@ -33,6 +34,11 @@
         "matches": ["https://codeforces.com/*/problem/*"],
         "js": ["src/contentScript/main.tsx"],
         "run_at": "document_end"
+      },
+      {
+        "matches" : ["https://codeforces.com/profile/*"],
+        "js" : ["src/profileScript/main.tsx"],
+        "run_at" : "document_end"
       }
     ]
   }

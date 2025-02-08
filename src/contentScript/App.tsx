@@ -23,6 +23,12 @@ function getCodeforcesProblemId(url : string) {
   }
 }
 
+function getRandomInt() {
+  const min = Math.ceil(100);
+  const max = Math.floor(5000);
+  return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+
 
 function App() {
   
@@ -31,18 +37,32 @@ function App() {
   const [problem, setProblem] = useState<DBinstance>({
     id : " ",
     name : " ",
+    rating : "other",
     solved : false,
     time : -1.0 // indicate new problem.
   });
   useEffect(() => {
     const fetchProblem = async () => {
-      // Get the problem URL
+      // Get the problem URL...
       const url = window.location.href;
       let problemId = getCodeforcesProblemId(url);
 
-      // Get the Problem Name
+      // Get the Problem Name...
       const problemTitle = document.getElementsByClassName("title")[0]?.innerHTML;
+      // Get the original status from codeforces...
       const status = document.getElementsByClassName("verdict-accepted")[0];
+      // Get the problem rating...
+      let rating = null;
+      const difficultyElement = document.querySelector('.tag-box[title="Difficulty"]');
+      if(difficultyElement){
+        const difficultyText = difficultyElement.innerHTML.trim(); // Get the text content and remove extra whitespace
+        const difficultyMatch = difficultyText.match(/\*(\d+)/); // Extract the number
+
+        if(difficultyMatch){
+          rating = difficultyMatch[1];
+        }
+      }
+
       if(status == null){
         setSolves(false);
       } else {
@@ -53,6 +73,7 @@ function App() {
       const updatedProblem : DBinstance = {
         id : problemId || " ",
         name: problemTitle,
+        rating : rating || "other",
         solved : false,
         time : -1.0
       };
@@ -73,12 +94,23 @@ function App() {
         if(solves === true){
           // solved without codeclock...
           // console.log("Solved without CodeClock");
+          const updatedProblem : DBinstance = {
+            id : problem.id,
+            name: problem.name,
+            rating : problem.rating,
+            solved : true,
+            time : getRandomInt()
+          };
+          setProblem(updatedProblem);
+          await chrome.runtime.sendMessage({type:Actions.SET_STATE, payload:updatedProblem});
+        
         } else {
           // new problem
           // console.log("New Problem");
           const updatedProblem : DBinstance = {
             id : problem.id,
             name: problem.name,
+            rating : problem.rating,
             solved : false,
             time : 0.0
           };
@@ -89,6 +121,7 @@ function App() {
           const updatedProblem : DBinstance = {
             id : problem.id,
             name: problem.name,
+            rating : problem.rating,
             solved : solves,
             time : response.problem.time
           }

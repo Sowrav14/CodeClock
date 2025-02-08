@@ -1,8 +1,9 @@
-import DBinstance, { getItemById, updateItem } from "../utils/indexedDB";
+import DBinstance, { getItemById, getSolvedProblems, updateItem } from "../utils/indexedDB";
 
 export enum Actions {
     GET_STATE = "get-state",
     SET_STATE = "set-state",
+    GET_ALL = "get-all",
 }
 export type Action = `${Actions}`;
 
@@ -16,7 +17,12 @@ interface MessageWithPayload {
   payload: DBinstance;
 }
 
-type Message = MessageWithoutPayload | MessageWithPayload;
+interface MessageForAll {
+  type : Actions.GET_ALL;
+  payload?:never;
+}
+
+type Message = MessageWithoutPayload | MessageWithPayload | MessageForAll;
 
 async function fetchDB(problem: DBinstance){
     const data = await getItemById(problem.id);
@@ -32,8 +38,17 @@ async function storeDb(problem:DBinstance) {
     await updateItem(problem.id, problem);
 }
 
-
 chrome.runtime.onMessage.addListener((message: Message, _, sendResponse) => {
+
+  if(message.type === Actions.GET_ALL) {
+    getSolvedProblems().then((problems) => {
+      sendResponse({success:true, problems:problems})
+    }).catch(err => {
+      sendResponse({sucess:false, error:err.message})
+    });
+    return true;
+  }
+
   if (message.type === Actions.GET_STATE) {
       // console.log("get payload : ", message.payload);
       fetchDB(message.payload).then((res) => {
