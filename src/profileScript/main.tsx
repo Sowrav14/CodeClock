@@ -8,6 +8,7 @@ const root = document.createElement("div");
 root.id = "code-clock-charts";
 root.classList.add("roundbox");
 root.classList.add("borderTopRound");
+root.classList.add("borderBottomRound");
 root.style.padding = "2em 1em 2em 1em";
 root.style.marginTop = "1em";
 pageContent?.append(root);

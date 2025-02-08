@@ -82,7 +82,7 @@ const SolvedProblemsChart = () => {
 
 
   return (
-    <div style={{display:"flex", flexDirection:'column', gap:'10px', border:'1px solid #F1F2EB'}}>
+    <div style={{display:"flex", flexDirection:'column', gap:'10px', border:'1px solid #888'}}>
       <h3 style={{fontSize:'1.5rem', padding:'5px', letterSpacing:'1.2px', fontWeight:'bold', textAlign:'center'}}> Problem Solving Time Distribution </h3>
     
       <div style={{ 

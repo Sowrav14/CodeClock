@@ -1,3 +1,4 @@
+import ProblemRatingChart from "./Barchart";
 import SolvedProblemsChart from "./Piechart";
 
 export default function App() {
@@ -7,8 +8,10 @@ export default function App() {
       flexDirection:'column',
       gap:'20px'
     }}>
-        <h3 style={{color:'#3B5998', fontSize:'1.5rem', padding:'5px', letterSpacing:'1.2px', fontWeight:'bold'}}> CodeClock Statistics </h3>
+        <h3 style={{color:'#3B5998', fontSize:'2rem', padding:'5px', letterSpacing:'1.2px', fontWeight:'bold'}}> CodeClock Statistics </h3>
         <SolvedProblemsChart/>
+        <br/>
+        <ProblemRatingChart/>
     </div>
   )
 }
