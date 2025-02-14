@@ -1,7 +1,7 @@
 import formatTime from "./timeformat";
 
 export default function Solved({time} : {time:number}) {
-	console.log("In the solved function ", time);
+	// console.log("In the solved function ", time);
 	return (
 		<div className="app">
 			<h3 style={{marginBottom:'10px'}}> Well Done </h3>

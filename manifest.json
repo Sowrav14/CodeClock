@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "CodeClock",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Improve your problem solving strategy with CodeClock stopwatch and statistics",
     "icons": {
       "16": "src/assets/CodeClock16.png",
@@ -14,7 +14,6 @@
       "declarativeContent",
       "scripting",
       "storage",
-      "unlimitedStorage",
       "tabs"
     ],
     "host_permissions": ["https://codeforces.com/*/problem/*"],

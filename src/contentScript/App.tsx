@@ -94,12 +94,13 @@ function App() {
         if(solves === true){
           // solved without codeclock...
           // console.log("Solved without CodeClock");
+          const randomTime = getRandomInt();
           const updatedProblem : DBinstance = {
             id : problem.id,
             name: problem.name,
             rating : problem.rating,
             solved : true,
-            time : getRandomInt()
+            time : randomTime
           };
           setProblem(updatedProblem);
           await chrome.runtime.sendMessage({type:Actions.SET_STATE, payload:updatedProblem});

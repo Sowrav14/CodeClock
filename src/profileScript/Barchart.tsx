@@ -25,6 +25,15 @@ const options = {
   },
 };
 
+const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};
+
 const ProblemRatingChart = () => {
   const [data, setData] = useState<any>(null);
 
@@ -73,118 +82,130 @@ const ProblemRatingChart = () => {
 		};
     // Group by rating and calculate sum of times
     problems.forEach(({ rating, time }) => { 
-			if(rating == '800'){
-				ratingMap['800'].count += 1;
-				ratingMap['800'].total += time;
-			} else if(rating == '900'){
-				ratingMap['900'].count += 1;
-				ratingMap['900'].total += time;
-			} else if(rating == '1000'){
-				ratingMap['1000'].count += 1;
-				ratingMap['1000'].total += time;
-			} else if(rating == '1100'){
-				ratingMap['1100'].count += 1;
-				ratingMap['1100'].total += time;
-			} else if(rating == '1200'){
-				ratingMap['1200'].count += 1;
-				ratingMap['1200'].total += time;
-			} else if(rating == '1300'){
-				ratingMap['1300'].count += 1;
-				ratingMap['1300'].total += time;
-			} else if(rating == '1400'){
-				ratingMap['1400'].count += 1;
-				ratingMap['1400'].total += time;
-			} else if(rating == '1500'){
-				ratingMap['1500'].count += 1;
-				ratingMap['1500'].total += time;
-			} else if(rating == '1600'){
-				ratingMap['1600'].count += 1;
-				ratingMap['1600'].total += time;
-			} else if(rating == '1700'){
-				ratingMap['1700'].count += 1;
-				ratingMap['1700'].total += time;
-			} else if(rating == '1800'){
-				ratingMap['1800'].count += 1;
-				ratingMap['1800'].total += time;
-			} else if(rating == '1900'){
-				ratingMap['1900'].count += 1;
-				ratingMap['1900'].total += time;
-			} else if(rating == '2000'){
-				ratingMap['2000'].count += 1;
-				ratingMap['2000'].total += time;
-			} else if(rating == '2100'){
-				ratingMap['2100'].count += 1;
-				ratingMap['2100'].total += time;
-			} else if(rating == '2200'){
-				ratingMap['2200'].count += 1;
-				ratingMap['2200'].total += time;
-			} else if(rating == '2300'){
-				ratingMap['2300'].count += 1;
-				ratingMap['2300'].total += time;
-			} else if(rating == '2400'){
-				ratingMap['2400'].count += 1;
-				ratingMap['2400'].total += time;
-			} else if(rating == '2500'){
-				ratingMap['2500'].count += 1;
-				ratingMap['2500'].total += time;
-			} else if(rating == '2600'){
-				ratingMap['2600'].count += 1;
-				ratingMap['2600'].total += time;
-			} else if(rating == '2700'){
-				ratingMap['2700'].count += 1;
-				ratingMap['2700'].total += time;
-			} else if(rating == '2800'){
-				ratingMap['2800'].count += 1;
-				ratingMap['2800'].total += time;
-			} else if(rating == '2900'){
-				ratingMap['2900'].count += 1;
-				ratingMap['2900'].total += time;
-			} else if(rating == '3000'){
-				ratingMap['3000'].count += 1;
-				ratingMap['3000'].total += time;
-			} else {
-				ratingMap['other'].count += 1;
-				ratingMap['other'].total += time;
-			}
+		time = time / 60;
+		if(rating == '800'){
+			ratingMap['800'].count += 1;
+			ratingMap['800'].total += time;
+		} else if(rating == '900'){
+			ratingMap['900'].count += 1;
+			ratingMap['900'].total += time;
+		} else if(rating == '1000'){
+			ratingMap['1000'].count += 1;
+			ratingMap['1000'].total += time;
+		} else if(rating == '1100'){
+			ratingMap['1100'].count += 1;
+			ratingMap['1100'].total += time;
+		} else if(rating == '1200'){
+			ratingMap['1200'].count += 1;
+			ratingMap['1200'].total += time;
+		} else if(rating == '1300'){
+			ratingMap['1300'].count += 1;
+			ratingMap['1300'].total += time;
+		} else if(rating == '1400'){
+			ratingMap['1400'].count += 1;
+			ratingMap['1400'].total += time;
+		} else if(rating == '1500'){
+			ratingMap['1500'].count += 1;
+			ratingMap['1500'].total += time;
+		} else if(rating == '1600'){
+			ratingMap['1600'].count += 1;
+			ratingMap['1600'].total += time;
+		} else if(rating == '1700'){
+			ratingMap['1700'].count += 1;
+			ratingMap['1700'].total += time;
+		} else if(rating == '1800'){
+			ratingMap['1800'].count += 1;
+			ratingMap['1800'].total += time;
+		} else if(rating == '1900'){
+			ratingMap['1900'].count += 1;
+			ratingMap['1900'].total += time;
+		} else if(rating == '2000'){
+			ratingMap['2000'].count += 1;
+			ratingMap['2000'].total += time;
+		} else if(rating == '2100'){
+			ratingMap['2100'].count += 1;
+			ratingMap['2100'].total += time;
+		} else if(rating == '2200'){
+			ratingMap['2200'].count += 1;
+			ratingMap['2200'].total += time;
+		} else if(rating == '2300'){
+			ratingMap['2300'].count += 1;
+			ratingMap['2300'].total += time;
+		} else if(rating == '2400'){
+			ratingMap['2400'].count += 1;
+			ratingMap['2400'].total += time;
+		} else if(rating == '2500'){
+			ratingMap['2500'].count += 1;
+			ratingMap['2500'].total += time;
+		} else if(rating == '2600'){
+			ratingMap['2600'].count += 1;
+			ratingMap['2600'].total += time;
+		} else if(rating == '2700'){
+			ratingMap['2700'].count += 1;
+			ratingMap['2700'].total += time;
+		} else if(rating == '2800'){
+			ratingMap['2800'].count += 1;
+			ratingMap['2800'].total += time;
+		} else if(rating == '2900'){
+			ratingMap['2900'].count += 1;
+			ratingMap['2900'].total += time;
+		} else if(rating == '3000'){
+			ratingMap['3000'].count += 1;
+			ratingMap['3000'].total += time;
+		} else {
+			ratingMap['other'].count += 1;
+			ratingMap['other'].total += time;
+		}
 			
     });
 
     // Compute average time per rating
-    const ratings = Object.keys(ratingMap).filter((rating) => ratingMap[rating].count > 0);
-    const avgTimes = ratings.map((rating) => ratingMap[rating].total / ratingMap[rating].count);
-		// console.log(problems, ratingMap, ratings, avgTimes);
+    const ratings = Object.keys(ratingMap);
+	const avgTimes = ratings.map((rating) =>
+		ratingMap[rating].count > 0 ? ratingMap[rating].total / ratingMap[rating].count : 0
+	);
+	// console.log(problems, ratingMap, ratings, avgTimes);
     // Chart data
+	const bgColor = getRandomColor();
+	const borderColor = getRandomColor();
     const chartData = {
       labels: ratings.map((r) => `${r}`),
       datasets: [
         {
-					axis:'y',
           label: "Average Time",
           data: avgTimes,
-          backgroundColor: "#36a2eb",
-          borderColor: "#1e6ebd",
+          backgroundColor: bgColor,
+          borderColor: borderColor,
           borderWidth: 1,
         },
       ],
     };
-		console.log(chartData);
+		// console.log(chartData);
     setData(chartData);
   };
 
+//   console.log(data);
   return (
-    <div style={{ 
-			display:"flex", 
-			flexDirection:'column', 
-			gap:'10px', 
-			border:'1px solid #888',
+	<div>
+    {data && data.labels.length > 0 ?
+	<div style={{ 
+			display: "flex",
+			flexDirection: "column",
+			gap: "10px",
+			borderRadius: "8px",
+			padding: "10px",
+			border: "1px solid #ddd",
+			boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+			transition: "box-shadow 0.2s ease-in-out",
 			alignItems: "center",
-      justifyContent : "center",
-      justifyItems : "center",
-      alignContent : "center", 
+			justifyContent : "center",
+			justifyItems : "center",
+			alignContent : "center", 
 		}}>
 			<h3 style={{fontSize:'1.5rem', padding:'5px', letterSpacing:'1.2px', fontWeight:'bold', textAlign:'center'}}> Average Problem Solving Time by Rating </h3>
       {data ? <Bar data={data} options={options} /> : <p>Loading chart...</p>}
-    </div>
+    </div> : null}
+	</div>
   );
 };
 

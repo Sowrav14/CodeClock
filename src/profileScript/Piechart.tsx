@@ -40,23 +40,42 @@ const SolvedProblemsChart = () => {
 
   const processChartData = (problems : DBinstance[]) => {
     const timeRanges = {
-      "< 5 min": 0,
-      "< 10 min": 0,
-      "< 15 min": 0,
-      "< 20 min": 0,
-      "< 25 min": 0,
-      "< 30 min": 0,
-      "30+ min": 0,
+      "0 to 5 min": 0,
+      "5 to 10 min": 0,
+      "10 to 15 min": 0, 
+      "15 to 20 min": 0, 
+      "20 to 25 min": 0,
+      "25 to 30 min": 0, 
+      "30 to 40 min": 0,
+      "40 to 50 min": 0,
+      "50 to 60 min": 0,
+      "60 to 70 min": 0,
+      "70 to 80 min": 0,
+      "80 to 90 min": 0,
+      "90 to 100 min": 0,
+      "100 to 110 min": 0,
+      "110 to 120 min": 0,
+      "120+ min": 0
     };
 
     problems.forEach(({ time }) => {
-      if (time < 5) timeRanges["< 5 min"]++;
-      else if (time < 10) timeRanges["< 10 min"]++;
-      else if (time < 15) timeRanges["< 15 min"]++;
-      else if (time < 20) timeRanges["< 20 min"]++;
-      else if (time < 25) timeRanges["< 25 min"]++;
-      else if (time < 30) timeRanges["< 30 min"]++;
-      else timeRanges["30+ min"]++;
+      time = time / 60;
+      if (time < 5) timeRanges["0 to 5 min"]++;
+        else if (time < 10) timeRanges["5 to 10 min"]++;
+        else if (time < 15) timeRanges["10 to 15 min"]++;
+        else if (time < 20) timeRanges["15 to 20 min"]++;
+        else if (time < 25) timeRanges["20 to 25 min"]++;
+        else if (time < 30) timeRanges["25 to 30 min"]++;
+        else if (time < 40) timeRanges["30 to 40 min"]++;
+        else if (time < 50) timeRanges["40 to 50 min"]++;
+        else if (time < 60) timeRanges["50 to 60 min"]++;
+        else if (time < 70) timeRanges["60 to 70 min"]++;
+        else if (time < 80) timeRanges["70 to 80 min"]++;
+        else if (time < 90) timeRanges["80 to 90 min"]++;
+        else if (time < 100) timeRanges["90 to 100 min"]++;
+        else if (time < 110) timeRanges["100 to 110 min"]++;
+        else if (time < 120) timeRanges["120+ min"]++;
+        else timeRanges["120+ min"]++;
     });
 
     // Filter out zero values
@@ -68,10 +87,14 @@ const SolvedProblemsChart = () => {
         {
           data: filteredEntries.map(([_, value]) => value),
           backgroundColor: [
-            "#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff", "#ff9f40", "#c9cbcf"
+            "#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff", 
+            "#ff9f40", "#c9cbcf", "#ff6384", "#36a2eb", "#ffcd56", 
+            "#4bc0c0", "#9966ff", "#ff9f40", "#c9cbcf", "#ff6384"
           ],
           hoverBackgroundColor: [
-            "#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff", "#ff9f40", "#c9cbcf"
+            "#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff", 
+            "#ff9f40", "#c9cbcf", "#ff6384", "#36a2eb", "#ffcd56", 
+            "#4bc0c0", "#9966ff", "#ff9f40", "#c9cbcf", "#ff6384"
           ],
         },
       ],
@@ -80,9 +103,21 @@ const SolvedProblemsChart = () => {
     setData(chartData);
   };
 
+  // console.log(data);
 
   return (
-    <div style={{display:"flex", flexDirection:'column', gap:'10px', border:'1px solid #888'}}>
+    <div>
+    {data && data.labels.length > 0 ?
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px",
+      borderRadius: "8px",
+      padding: "10px",
+      border: "1px solid #ddd",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      transition: "box-shadow 0.2s ease-in-out",
+    }}>
       <h3 style={{fontSize:'1.5rem', padding:'5px', letterSpacing:'1.2px', fontWeight:'bold', textAlign:'center'}}> Problem Solving Time Distribution </h3>
     
       <div style={{ 
@@ -135,6 +170,7 @@ const SolvedProblemsChart = () => {
           )}
         </div>
       </div>
+    </div> : null }
     </div>
   );
 };
