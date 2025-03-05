@@ -41,14 +41,16 @@ export default function App() {
         <div style={{
           display : "flex",
           flexDirection : "column",
-          textAlign: 'center', 
+          textAlign: 'center',
+          alignContent: 'center',
+          justifyContent: 'center',
           gap: "10px",
           transition: "box-shadow 0.2s ease-in-out",
         }}>
-            <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#333' }}>Welcome to CodeClock 🚀</h2>
+            <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#333' }}><span style={{ color: '#3B5998' }}>CodeClock</span> </h2>
             <p style={{ fontSize: '14px', color: '#555' }}>🎉 <strong>Get started on your problem-solving journey!</strong></p>
             <p style={{ fontSize: '14px', color: '#555' }}>You haven't solved any problems yet, but that's okay! Start using the stopwatch to track your time, improve your speed, and level up your skills.</p>
-            <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#007bff' }}>🔥 Challenge yourself. Track progress. Get better.</p>
+            <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#007bff' }}>🔥 Master Time, Master Code! </p>
         </div>
       }
     </div>
