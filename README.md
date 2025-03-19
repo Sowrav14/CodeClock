@@ -11,31 +11,32 @@
 ## 📸 Screenshots  
 
 ### 🏆 Problem Solving Experience  
-**Sidebar on the problem page:**  
 <p align="center"><img src="./screenshots/problem-page-sidebar.png" alt="Problem Page" /></p>  
+<p align="center">Sidebar on the problem page</p>  
 
-**Inactive sidebar before solving:**  
 <p align="center"><img src="./screenshots/inactive-sidebar.png" alt="Inactive Sidebar" /></p>  
+<p align="center">Inactive sidebar before solving</p>  
 
-**Active sidebar while solving:**  
 <p align="center"><img src="./screenshots/active-sidebar-solving.png" alt="Active Sidebar Solving" /></p>  
+<p align="center">Active sidebar while solving</p>  
 
-**Sidebar after solving, showing recorded time:**  
 <p align="center"><img src="./screenshots/active-sidebar-solved.png" alt="Solved Sidebar" /></p>  
+<p align="center">Sidebar after solving, showing recorded time</p>  
 
 ### 📊 Performance Tracking in Codeforces Profile  
-**Overview of solving statistics:**  
 <p align="center"><img src="./screenshots/statistics-profile.png" alt="Statistics Profile" /></p>  
+<p align="center">Overview of solving statistics</p>  
 
-**Detailed statistics with problem-wise insights:**  
 <p align="center"><img src="./screenshots/statistics-profile-continue.png" alt="Detailed Statistics" /></p>  
+<p align="center">Detailed statistics with problem-wise insights</p>  
 
 ### ⚙️ Additional Features  
-**CodeClock integrated into Codeforces profile:**  
 <p align="center"><img src="./screenshots/profile-view-first-time.png" alt="Profile View" /></p>  
+<p align="center">CodeClock integrated into Codeforces profile</p>  
 
-**Popup menu for quick actions:**  
-<p align="center"><img src="./screenshots/popup-menu.png" alt="Popup Menu" /></p>
+<p align="center"><img src="./screenshots/popup-menu.png" alt="Popup Menu" /></p>  
+<p align="center">Popup menu for quick actions</p>
+
  
 
 ## 🛠 Installation (Unpacked) 
