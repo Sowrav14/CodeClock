@@ -8,34 +8,35 @@
 ✅ **Time Tracking** – Automatically saves time taken per problem in IndexedDB for tracking progress on your problem solving speed.  
 ✅ **Statistics Dashboard** – View insights on problem-solving performance in the Codeforces profile section.  
 
-## 📸 Screenshots   
+## 📸 Screenshots  
 
 ### 🏆 Problem Solving Experience  
 **Sidebar on the problem page:**  
-![Problem Page](./screenshots/problem-page-sidebar.png)  
+<p align="center"><img src="./screenshots/problem-page-sidebar.png" alt="Problem Page" /></p>  
 
 **Inactive sidebar before solving:**  
-![Inactive Sidebar](./screenshots/inactive-sidebar.png)  
+<p align="center"><img src="./screenshots/inactive-sidebar.png" alt="Inactive Sidebar" /></p>  
 
 **Active sidebar while solving:**  
-![Active Sidebar](./screenshots/active-sidebar-solving.png)  
+<p align="center"><img src="./screenshots/active-sidebar-solving.png" alt="Active Sidebar Solving" /></p>  
 
 **Sidebar after solving, showing recorded time:**  
-![Solved Sidebar](./screenshots/active-sidebar-solved.png)  
+<p align="center"><img src="./screenshots/active-sidebar-solved.png" alt="Solved Sidebar" /></p>  
 
 ### 📊 Performance Tracking in Codeforces Profile  
 **Overview of solving statistics:**  
-![Statistics Profile](./screenshots/statistics-profile.png)  
+<p align="center"><img src="./screenshots/statistics-profile.png" alt="Statistics Profile" /></p>  
 
 **Detailed statistics with problem-wise insights:**  
-![Detailed Statistics](./screenshots/detailed-statistics-profile.png)  
+<p align="center"><img src="./screenshots/statistics-profile-continue.png" alt="Detailed Statistics" /></p>  
 
 ### ⚙️ Additional Features  
 **CodeClock integrated into Codeforces profile:**  
-![Profile View](./screenshots/codeclock-profile-view.png)  
+<p align="center"><img src="./screenshots/profile-view-first-time.png" alt="Profile View" /></p>  
 
 **Popup menu for quick actions:**  
-![Popup Menu](./screenshots/popup-menu.png)   
+<p align="center"><img src="./screenshots/popup-menu.png" alt="Popup Menu" /></p>
+ 
 
 ## 🛠 Installation (Unpacked) 
 
