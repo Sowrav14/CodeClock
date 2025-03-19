@@ -12,30 +12,30 @@
 
 ### 🏆 Problem Solving Experience  
 **Sidebar on the problem page:**  
-![Problem Page](./images/problem-page-sidebar.png)  
+![Problem Page](./screenshots/problem-page-sidebar.png)  
 
 **Inactive sidebar before solving:**  
-![Inactive Sidebar](./images/inactive-sidebar.png)  
+![Inactive Sidebar](./screenshots/inactive-sidebar.png)  
 
 **Active sidebar while solving:**  
-![Active Sidebar](./images/active-sidebar-solving.png)  
+![Active Sidebar](./screenshots/active-sidebar-solving.png)  
 
 **Sidebar after solving, showing recorded time:**  
-![Solved Sidebar](./images/active-sidebar-solved.png)  
+![Solved Sidebar](./screenshots/active-sidebar-solved.png)  
 
 ### 📊 Performance Tracking in Codeforces Profile  
 **Overview of solving statistics:**  
-![Statistics Profile](./images/statistics-profile.png)  
+![Statistics Profile](./screenshots/statistics-profile.png)  
 
 **Detailed statistics with problem-wise insights:**  
-![Detailed Statistics](./images/detailed-statistics-profile.png)  
+![Detailed Statistics](./screenshots/detailed-statistics-profile.png)  
 
 ### ⚙️ Additional Features  
 **CodeClock integrated into Codeforces profile:**  
-![Profile View](./images/codeclock-profile-view.png)  
+![Profile View](./screenshots/codeclock-profile-view.png)  
 
 **Popup menu for quick actions:**  
-![Popup Menu](./images/popup-menu.png)   
+![Popup Menu](./screenshots/popup-menu.png)   
 
 ## 🛠 Installation (Unpacked) 
 
@@ -101,8 +101,8 @@ Want to contribute or understand the code? Here's what you need:
 
 🔹 **Detailed Statistics** – More insights like per-topic and per-rating performance and speed analysis.  
 🔹 **Real-time Database** – Compare your solving time with other users.  
-🔹 **Problem-wise Standings** – View rankings based on solving speed.
-🔹 **Contest tracking** – Track of time in realtime and virtual contest and show detailed statistics.  
+🔹 **Problem-wise Standings** – View rankings based on solving speed.    
+🔹 **Contest tracking** – Track of time in realtime and virtual contest and show detailed statistics. 
 
 ## 🤝 Contributing  
 
@@ -119,4 +119,5 @@ Contributions are welcome!
 
 Found a bug? Have a suggestion? Open an issue or reach out!  
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sowrav-nath/)
+📧 Email: sowravvnath@gmail.com  
+LinkedIn: [![Sowrav Nath](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://www.linkedin.com/in/sowrav-nath/) 
