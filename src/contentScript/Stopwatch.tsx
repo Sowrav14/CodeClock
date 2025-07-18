@@ -28,10 +28,14 @@ const Stopwatch = ({problem} : {problem:DBinstance}) => {
   
   // save the current state to db...
   const saveCurrent = async (curTime : number) => {
-    const newProblem : DBinstance = {...problem};
-    newProblem.time = curTime;
-    console.log("updating time : ", newProblem.time, " --- ", time);
-    await chrome.runtime.sendMessage({type:Actions.SET_STATE, payload:newProblem});
+    // console.log("updating time : ", newProblem.time, " --- ", time);
+    await chrome.runtime.sendMessage({
+      type: Actions.SET_TIME,
+      payload: {
+        id: problem.id,
+        time : curTime,
+      },
+    });
   }
 
   // useeffect for auto save every 10s
@@ -48,10 +52,20 @@ const Stopwatch = ({problem} : {problem:DBinstance}) => {
   // handlesave to save in db..
   const handleSave = async() => {
     setIsRunning(false);
-    const newProblem : DBinstance = {...problem};
-    newProblem.solved = true;
-    newProblem.time = time;
-    await chrome.runtime.sendMessage({type:Actions.SET_STATE, payload:newProblem});
+    await chrome.runtime.sendMessage({
+      type : Actions.SET_SOLVE,
+      payload : {
+        id : problem.id,
+        solved : true
+      }
+    })
+    await chrome.runtime.sendMessage({
+      type: Actions.SET_TIME,
+      payload: {
+        id: problem.id,
+        time : time,
+      },
+    });
   }
 
 

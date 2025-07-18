@@ -1,161 +1,118 @@
-import {  useEffect, useState } from "react";
-import Stopwatch from "./Stopwatch"
+import { useEffect, useState } from "react";
+import Stopwatch from "./Stopwatch";
 import DBinstance from "../utils/indexedDB";
 import { Actions } from "../background/background";
 import Solved from "./Solved";
-
-function getCodeforcesProblemId(url : string) {
-  const regex1 = /codeforces\.com\/.*\/(\d+)\/.*\/([A-Z]\d*)/;
-  const regex2 = /codeforces\.com\/.*\/(\d+)\/([A-Z]\d*)/;
-  // const regex = /codeforces\.com\/.*\/(\d+)\/.*\/([A-Z]\d*)/;
-  // const gmatch = url.match(regex);
-  // console.log("gmatch", gmatch);
-  let match = url.match(regex1);
-  if (match) {
-      return `${match[1]}${match[2]}`;
-  } else {
-      match = url.match(regex2);
-      if(match){
-        return `${match[1]}${match[2]}`;
-      } else {
-        return null
-      }
-  }
-}
+import { createProblem, getCodeforcesProblemId } from "../utils/libs";
 
 function getRandomInt() {
   const min = Math.ceil(100);
   const max = Math.floor(5000);
-  return Math.floor(Math.random() * (max - min + 1)) + min; 
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 function App() {
-  
+  /* const [showDrawing, setShowDrawing] = useState(false); */
   const [isfetch, setisFetch] = useState<boolean>(false);
-  const [solves, setSolves] = useState<boolean> (false);
-  const [problem, setProblem] = useState<DBinstance>({
-    id : " ",
-    name : " ",
-    rating : "other",
-    solved : false,
-    time : -1.0 // indicate new problem.
-  });
+  const [problem, setProblem] = useState<DBinstance | null>(null);
+
   useEffect(() => {
     const fetchProblem = async () => {
-      // Get the problem URL...
+      // get the id
       const url = window.location.href;
-      let problemId = getCodeforcesProblemId(url);
+      const id = getCodeforcesProblemId(url);
+      if (id === null) return;
 
-      // Get the Problem Name...
-      const problemTitle = document.getElementsByClassName("title")[0]?.innerHTML;
-      // Get the original status from codeforces...
-      const status = document.getElementsByClassName("verdict-accepted")[0];
-      // Get the problem rating...
-      let rating = null;
-      const difficultyElement = document.querySelector('.tag-box[title="Difficulty"]');
-      if(difficultyElement){
-        const difficultyText = difficultyElement.innerHTML.trim(); // Get the text content and remove extra whitespace
-        const difficultyMatch = difficultyText.match(/\*(\d+)/); // Extract the number
+      let finalProblem: DBinstance | null = null;
+      // see if it is in database
+      const response = await chrome.runtime.sendMessage({
+        type: Actions.GET_STATE,
+        payload: id,
+      });
 
-        if(difficultyMatch){
-          rating = difficultyMatch[1];
+      if (response?.success) {
+        // the problem exist in db . but may be with wrong solve, time data...
+        const fetched = response.problem;
+        setProblem(fetched);
+        finalProblem = fetched;
+      } else {
+        const newProblem = await createProblem();
+        if (newProblem && newProblem.note) {
+          setProblem(newProblem);
+          finalProblem = newProblem;
         }
       }
+      if (finalProblem === null) return;
 
-      if(status == null){
-        setSolves(false);
-      } else {
-        setSolves(true);
+      // check the og solve status.
+      const status = document.getElementsByClassName("verdict-accepted")[0];
+      finalProblem.solved = status !== undefined;
+
+      await chrome.runtime.sendMessage({
+        type: Actions.SET_SOLVE,
+        payload: {
+          id: id,
+          solved: finalProblem.solved,
+        },
+      });
+
+      // check the time
+      if (finalProblem.time === -1.0) {
+        if (finalProblem.solved) {
+          finalProblem.time = getRandomInt();
+        } else {
+          finalProblem.time = 0.0;
+        }
+        await chrome.runtime.sendMessage({
+          type: Actions.SET_TIME,
+          payload: {
+            id: id,
+            time: finalProblem.time,
+          },
+        });
       }
-      // console.log(problemTitle);
 
-      const updatedProblem : DBinstance = {
-        id : problemId || " ",
-        name: problemTitle,
-        rating : rating || "other",
-        solved : false,
-        time : -1.0
-      };
-      setProblem(updatedProblem);
+      const tagsNodeList = document.querySelectorAll(".tag-box");
+      const tags: string[] = Array.from(tagsNodeList)
+        .filter((el) => (el as HTMLElement).title !== "Difficulty")
+        .map((tag) => tag.textContent?.trim() || "");
+      await chrome.runtime.sendMessage({
+        type: Actions.SET_TAGS,
+        payload: {
+          id: id,
+          tags: tags,
+        },
+      });
+
+      setProblem(finalProblem);
     };
     fetchProblem();
-  }, [])
+    setisFetch(true);
+  }, []);
 
   const fetchData = async () => {
-    // console.log("before fetching : ", problem);
-    // fetched from indexedDb...
-    const response = await chrome.runtime.sendMessage({type:Actions.GET_STATE, payload:problem});
-    if(response?.success){
-      // console.log("response from background : ", response.problem);
-      setProblem(response.problem);
-      // console.log("after fetching : ", problem);
-      if(response.problem.time === -1.0){
-        if(solves === true){
-          // solved without codeclock...
-          // console.log("Solved without CodeClock");
-          const randomTime = getRandomInt();
-          const updatedProblem : DBinstance = {
-            id : problem.id,
-            name: problem.name,
-            rating : problem.rating,
-            solved : true,
-            time : randomTime
-          };
-          setProblem(updatedProblem);
-          await chrome.runtime.sendMessage({type:Actions.SET_STATE, payload:updatedProblem});
-        
-        } else {
-          // new problem
-          // console.log("New Problem");
-          const updatedProblem : DBinstance = {
-            id : problem.id,
-            name: problem.name,
-            rating : problem.rating,
-            solved : false,
-            time : 0.0
-          };
-          setProblem(updatedProblem);
-          await chrome.runtime.sendMessage({type:Actions.SET_STATE, payload:updatedProblem});
-        }
-      } else {
-          const updatedProblem : DBinstance = {
-            id : problem.id,
-            name: problem.name,
-            rating : problem.rating,
-            solved : solves,
-            time : response.problem.time
-          }
-          setProblem(updatedProblem);
-          await chrome.runtime.sendMessage({type:Actions.SET_STATE, payload:updatedProblem});
-      }
+    setisFetch(true);
+  };
 
-      setisFetch(true);
-    } else {
-      console.log("failed to fetch data : ", response?.error);
-    }
-  }
-  
   return (
     <>
-      {!isfetch && 
-      <div className="app">
-        <h3 style={{marginBottom:'20px'}}> CodeClock </h3>
-        <button
-          style={{marginBottom : '20px'}}
-          onClick={fetchData}> Fetch </button>
-      </div>
-      }
+      {!isfetch && (
+        <div className="app">
+          <h3 style={{ marginBottom: "20px" }}> CodeClock </h3>
+          <button style={{ marginBottom: "20px" }} onClick={fetchData}>
+            {" "}
+            Fetch{" "}
+          </button>
+        </div>
+      )}
 
-      {solves && isfetch && 
-        <Solved time={problem.time} />
-      }
+      {problem && problem?.solved && isfetch && <Solved time={problem.time} />}
 
-      {!solves && isfetch && 
+      {problem && !problem?.solved && isfetch && (
         <Stopwatch problem={problem} />
-      }
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

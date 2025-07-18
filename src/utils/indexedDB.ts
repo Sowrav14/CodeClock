@@ -4,9 +4,12 @@ const STORE_NAME = "Problems";
 interface DBinstance {
     id : string,
     name : string,
+    url : string,
     rating : string,
     solved : boolean,
-    time : number
+    time : number,
+    tags : string[],
+    note : string,
 }
 export default DBinstance;
 
@@ -26,7 +29,7 @@ export const openDB = (): Promise<IDBDatabase> => {
     });
 };
 
-export const addItem = async (item: DBinstance): Promise<void> => {
+export const addItem = async (item: Partial<DBinstance>): Promise<void> => {
     const db = await openDB();
     const transaction = db.transaction(STORE_NAME, "readwrite");
     const store = transaction.objectStore(STORE_NAME);
@@ -50,32 +53,105 @@ export const getItemById = async (id: string): Promise<any | undefined> => {
     });
 };
 
-export const updateItem = async (id: string, updatedData: DBinstance): Promise<void> => {
+export const updateSolved = async (id: string, solved: boolean): Promise<void> => {
     const db = await openDB();
     const transaction = db.transaction(STORE_NAME, "readwrite");
     const store = transaction.objectStore(STORE_NAME);
-    // console.log("db opened");
-    // Get the existing item
-    const getRequest = store.get(id);
-    console.log(getRequest);
+
     return new Promise((resolve, reject) => {
+        const getRequest = store.get(id);
+
         getRequest.onsuccess = () => {
-            const existingItem = getRequest.result;
-            if (!existingItem) {
-                // console.log("not exist");
-                // return reject(new Error(`Item with ID ${id} not found`));
-                addItem(updatedData);
-            }
-            // Update the item
-            const updatedItem = {...updatedData};
-            const updateRequest = store.put(updatedItem);
-            // console.log("updating...", updateItem);
+        const item = getRequest.result;
+        if (!item) return reject(new Error(`Item with ID ${id} not found`));
+
+            item.solved = solved;
+            const updateRequest = store.put(item);
+
             updateRequest.onsuccess = () => resolve();
             updateRequest.onerror = () => reject(updateRequest.error);
         };
+
         getRequest.onerror = () => reject(getRequest.error);
     });
 };
+
+export const updateTime = async (id: string, time: number): Promise<void> => {
+    const db = await openDB();
+    const transaction = db.transaction(STORE_NAME, "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+
+    return new Promise((resolve, reject) => {
+        const getRequest = store.get(id);
+
+        getRequest.onsuccess = () => {
+            const item = getRequest.result;
+            if (!item) return reject(new Error(`Item with ID ${id} not found`));
+
+            item.time = time;
+            const updateRequest = store.put(item);
+
+            updateRequest.onsuccess = () => resolve();
+            updateRequest.onerror = () => reject(updateRequest.error);
+        };
+
+        getRequest.onerror = () => reject(getRequest.error);
+    });
+};
+
+export const updateTags = async (id: string, newTags: string[]): Promise<void> => {
+    const db = await openDB();
+    const transaction = db.transaction(STORE_NAME, "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+
+    return new Promise((resolve, reject) => {
+        const getRequest = store.get(id);
+
+        getRequest.onsuccess = () => {
+            const item = getRequest.result;
+            if (!item) return reject(new Error(`Item with ID ${id} not found`));
+
+            const existingTags: string[] = Array.isArray(item.tags) ? item.tags : [];
+            const incomingTags: string[] = Array.isArray(newTags) ? newTags : [];
+
+            const updatedTags = Array.from(new Set([...existingTags, ...incomingTags]));
+
+            item.tags = updatedTags;
+            const updateRequest = store.put(item);
+
+            updateRequest.onsuccess = () => resolve();
+            updateRequest.onerror = () => reject(updateRequest.error);
+        };
+
+        getRequest.onerror = () => reject(getRequest.error);
+    });
+};
+
+
+export const updateNote = async (id: string, note: string): Promise<void> => {
+    const db = await openDB();
+    const transaction = db.transaction(STORE_NAME, "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+
+    return new Promise((resolve, reject) => {
+        const getRequest = store.get(id);
+
+        getRequest.onsuccess = () => {
+            const item = getRequest.result;
+            if (!item) return reject(new Error(`Item with ID ${id} not found`));
+
+            item.note = note;
+            const updateRequest = store.put(item);
+
+            updateRequest.onsuccess = () => resolve();
+            updateRequest.onerror = () => reject(updateRequest.error);
+        };
+
+        getRequest.onerror = () => reject(getRequest.error);
+    });
+};
+
+
 
 export const getSolvedProblems = async (): Promise<any[]> => {
     try {
@@ -94,6 +170,32 @@ export const getSolvedProblems = async (): Promise<any[]> => {
                     cursor.continue();
                 } else {
                     resolve(solvedProblems);
+                }
+            };
+    
+            transaction.onerror = () => reject(transaction.error);
+        });
+    } catch (error) {
+        console.error("Error accessing IndexedDB:", error);
+        return [];
+    }
+};
+
+export const getProblems = async (): Promise<any[]> => {
+    try {
+        const db = await openDB();
+        const transaction = db.transaction(STORE_NAME, "readonly");
+        const store = transaction.objectStore(STORE_NAME);
+        const allProblems: any[] = [];
+    
+        return new Promise((resolve, reject) => {
+            store.openCursor().onsuccess = (event) => {
+                const cursor = (event.target as IDBRequest).result;
+                if (cursor) {
+                    allProblems.push(cursor.value);
+                    cursor.continue();
+                } else {
+                    resolve(allProblems);
                 }
             };
     

@@ -35,6 +35,11 @@
         "run_at": "document_end"
       },
       {
+        "matches": ["https://codeforces.com/*/problem/*"],
+        "js": ["src/drawScript/main.tsx"],
+        "run_at": "document_end"
+      },
+      {
         "matches" : ["https://codeforces.com/profile/*"],
         "js" : ["src/profileScript/main.tsx"],
         "run_at" : "document_end"

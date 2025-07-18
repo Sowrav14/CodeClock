@@ -3,6 +3,7 @@ import { Actions } from "../background/background";
 import ProblemRatingChart from "./Barchart";
 import SolvedProblemsChart from "./Piechart";
 import Statistics from "./Statistics";
+import ProblemTable from "./Table";
 
 export default function App() {
   const [fetched, setFetched] = useState<boolean> (false);
@@ -33,10 +34,11 @@ export default function App() {
           flexDirection:'column',
           gap:'20px'
         }}>
-            <h3 style={{color:'#3B5998', fontSize:'2rem', padding:'5px', letterSpacing:'1.2px', fontWeight:'bold'}}> CodeClock Statistics </h3>
+            <h3 style={{color:'#3B5998', fontSize:'2rem', padding:'5px', letterSpacing:'1.2px', fontWeight:'bold', textAlign:'center'}}> CodeClock Statistics </h3>
             <Statistics />
             <SolvedProblemsChart/>
             <ProblemRatingChart/>
+            <ProblemTable/>
         </div> :
         <div style={{
           display : "flex",
