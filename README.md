@@ -1,43 +1,72 @@
-# ⏰ CodeClock : Codeforces Stopwatch & Statistics Chrome Extension  
+# ⏰ CodeClock: Chrome Extension for Codeforces
 
-**Track your problem-solving time and improve your performance on Codeforces!**  
+**Track your solving time, take notes & sketches, and analyze your performance – all within Codeforces!** 
+
+
+
 
 ## 📌 Features  
 
-✅ **Stopwatch for Codeforces Problems** – Track time on particular problem while solving or after solved directly from the problem page sidebar.  
-✅ **Time Tracking** – Automatically saves time taken per problem in IndexedDB for tracking progress on your problem solving speed.  
-✅ **Statistics Dashboard** – View insights on problem-solving performance in the Codeforces profile section.  
+- ⏱️ **Stopwatch** – Track time directly from the problem page sidebar.
+- 📝 **Rich Notes & Sketches** – Take notes and draw visual solutions per problem.
+- 📊 **Performance Stats** – Analyze problem-wise time, tags, and accuracy.
+- 🏷️ **Tagging System** – Tag problems to filter and reflect later for notes and quick revision.
+- 💾 **Offline Storage** – Saves data locally via IndexedDB.
 
-## 📸 Screenshots  
 
-### 🏆 Problem Solving Experience  
-<p align="center"><img src="./screenshots/problem-page-sidebar.png" alt="Problem Page" /></p>  
-<p align="center">Sidebar on the problem page</p>  
 
-<p align="center"><img src="./screenshots/inactive-sidebar.png" alt="Inactive Sidebar" /></p>  
-<p align="center">Inactive sidebar before solving</p>  
 
-<p align="center"><img src="./screenshots/active-sidebar-solving.png" alt="Active Sidebar Solving" /></p>  
-<p align="center">Active sidebar while solving</p>  
+## 📸 Screenshots
 
-<p align="center"><img src="./screenshots/active-sidebar-solved.png" alt="Solved Sidebar" /></p>  
-<p align="center">Sidebar after solving, showing recorded time</p>  
+<details> <summary>🏆 Problem Solving Interface</summary>
 
-### 📊 Performance Tracking in Codeforces Profile  
-<p align="center"><img src="./screenshots/statistics-profile.png" alt="Statistics Profile" /></p>  
-<p align="center">Overview of solving statistics</p>  
+<p align="center"><img src="./screenshots/problem-page-sidebar-layout.png" alt="Problem Page Sidebar" /></p> <p align="center">Displays stopwatch and problem-specific controls in the sidebar.</p>
 
-<p align="center"><img src="./screenshots/statistics-profile-continue.png" alt="Detailed Statistics" /></p>  
-<p align="center">Detailed statistics with problem-wise insights</p>  
 
-### ⚙️ Additional Features  
-<p align="center"><img src="./screenshots/profile-view-first-time.png" alt="Profile View" /></p>  
-<p align="center">CodeClock integrated into Codeforces profile</p>  
+<p align="center"><img src="./screenshots/new-problem-starting.png" alt="Starting Problem" /></p> <p align="center">Interface when a new problem-solving session begins.</p>
 
-<p align="center"><img src="./screenshots/popup-menu.png" alt="Popup Menu" /></p>  
-<p align="center">Popup menu for quick actions</p>
+
+<p align="center"><img src="./screenshots/problem-solving-sidebar.png" alt="Active Solving" /></p> <p align="center">Timer runs while solving the problem.</p>
+
+
+<p align="center"><img src="./screenshots/problem-solved-sidebar.png" alt="Problem Solved" /></p> <p align="center">Displays the recorded solving time post-completion.</p>
+</details> <details> <summary>✏️ Drawing & Note-Taking Tools</summary>
+
+
+<p align="center"><img src="./screenshots/problem-page-sidebar-layout.png" alt="Tool Access" /></p> <p align="center">Floating action button for opening drawing or note-taking tools.</p>
+
+
+<p align="center"><img src="./screenshots/using-drawing-tool.png" alt="Drawing Tool" /></p> <p align="center">Sketching ideas or visualizing concepts during problem solving.</p>
+
+
+<p align="center"><img src="./screenshots/using-note-taking-tool.png" alt="Note-Taking Tool" /></p> <p align="center">Documenting observations or strategies while solving.</p>
+</details> <details> <summary>📊 Performance Tracking</summary>
+
+
+<p align="center"><img src="./screenshots/statistics-on-solved-problem.png" alt="Statistics Summary" /></p> <p align="center">Overview of solved problems and associated metrics.</p>
+
+
+<p align="center"><img src="./screenshots/statistics-on-solved-problem-continued.png" alt="Detailed Stats" /></p> <p align="center">Detailed breakdown of performance trends.</p>
+
+
+<p align="center"><img src="./screenshots/problem-table-for-quick-recap.png" alt="Problem Table" /></p> <p align="center">Compact table summarizing problem history for review.</p>
+
+
+<p align="center"><img src="./screenshots/problem-table-filtering-by-tags.png" alt="Tag Filtering" /></p> <p align="center">Filter problems by tags for focused revision.</p>
+
+
+<p align="center"><img src="./screenshots/problem-table-expanded-note.png" alt="Expanded Notes" /></p> <p align="center">View and edit personal notes per problem.</p>
+</details> <details> <summary>⚙️ Additional Features</summary>
+
+
+<p align="center"><img src="./screenshots/profile-view-first-time.png" alt="Profile View" /></p> <p align="center">Displays CodeClock summary in the user’s Codeforces profile.</p>
+
+
+<p align="center"><img src="./screenshots/popup-menu.png" alt="Popup Menu" /></p> <p align="center">Provides quick access to common extension features.</p>
+</details>
 
  
+
 
 ## 🛠 Installation (Unpacked) 
 
@@ -64,13 +93,23 @@ Before running the extension, ensure you have the following installed:
 
 Now, the extension is ready to use! 🎉  
 
-## 🎯 How to Use  
+
+
+
+
+## 🧑‍💻 Usage Guide  
 
 1. **Open a Codeforces Problem Page** – The stopwatch will appear in the sidebar.  
 2. **Start the Timer** – Click to begin tracking.  
 3. **Solve the Problem** – Work on your solution while the timer runs.  
-4. **Stop & Save** – The extension saves the time taken automatically.  
-5. **View Statistics** – Check your performance in the **Profile Section** of Codeforces.  
+4. **Draw & Note** - Navigate the bottom right corner for Drawing and Note taking dialog, use it for sketching the problem and taking note for the problem. You can also tag the problem for your convenient of tracking it later.
+5. **Stop & Save** – The extension saves the time taken automatically.  
+6. **View Statistics** – Check your performance in the **Profile Section** of Codeforces.  
+7. **Problems Tracking** - In profile section you also find the table of problems solved using CodeClock. You can see your saved notes for quick revision by filtering by tags.
+
+
+
+
 
 ## 👨‍💻 Developer Guide  
 
@@ -99,12 +138,17 @@ Want to contribute or understand the code? Here's what you need:
   - [Medium Blog-1](https://dev.to/bnn1/mise-en-place-31n5)
   - [Medium Blog-2](https://dev.to/arglee/chrome-extensions-using-vite-typescript-react-stepwise-process-2ddp)
 
-## 🚀 Future Plans  
+
+
+## 📅 Roadmap 
 
 🔹 **Detailed Statistics** – More insights like per-topic and per-rating performance and speed analysis.  
 🔹 **Real-time Database** – Compare your solving time with other users.  
 🔹 **Problem-wise Standings** – View rankings based on solving speed.    
 🔹 **Contest tracking** – Track of time in realtime and virtual contest and show detailed statistics. 
+
+
+
 
 ## 🤝 Contributing  
 
@@ -116,6 +160,9 @@ Contributions are welcome!
 3. Make your changes & commit: `git commit -m "Add new feature"`.  
 4. Push to your fork: `git push origin feature-name`.  
 5. Create a Pull Request.  
+
+
+
 
 ## 💬 Feedback & Support  
 

@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "CodeClock",
-    "version": "1.0.0",
-    "description": "Improve your problem solving strategy with CodeClock stopwatch and statistics",
+    "version": "2.0.0",
+    "description": "Improve your problem solving strategy with CodeClock’s stopwatch, notes, sketches, and performance insights.",
     "icons": {
       "16": "src/assets/CodeClock16.png",
       "48": "src/assets/CodeClock16.png",
